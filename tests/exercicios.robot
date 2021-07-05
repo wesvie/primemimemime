@@ -5,40 +5,67 @@ Library    Collections
 *** Variable ***
 ${NOME}        Wesley
 
-&{PESSOAS}
+&{PESSOAa}
 ...                 nome=Wesley
 ...                 sobrenome=Vieira
 ...                 idade=23
+...                 gosto=tudo menos funk
+...                 profissão=estudante
+
+&{PESSOAb}
+...                 nome=Caz
+...                 sobrenome=Al'bé
+...                 idade=65
+...                 gosto=humor
+...                 profissão=aposentado
+
+&{PESSOAc}
+...                 nome=Fabio
+...                 sobrenome=Pancas
+...                 idade=46
+...                 gosto=jornalismo informativo
+...                 profissão=dublê
+
+@{PESSOAS}      &{PESSOAa}  &{PESSOAb}  &{PESSOAc}
  
 @{FRUTAS}       abacaxi     banana      pão     carburador      caixa de som      
 
 *** Test Case ***
 Cenario: Imprimir todas as informações da PESSOA contidas no dicionario
+    FOR    ${PESSOA}   IN  @{PESSOAS}
+        Log To Console  ${PESSOA.nome} ${PESSOA.sobrenome}, tem ${PESSOA.idade} anos de idade, gosta de ${PESSOA.gosto} e trabalha como ${PESSOA.profissão}
+        Log To Console      ${PESSOA.nome}  
+        Log To Console      ${PESSOA.sobrenome}  
+        Log To Console      ${PESSOA.idade}  
+        Log To Console      ${PESSOA.gosto}  
+        Log To Console      ${PESSOA.profissão} 
+        Log To Console      \n
+    END
 
-    Log To Console  ${PESSOAS.nome}
-    Log To Console  ${PESSOAS.sobrenome}
-    Log To Console  ${PESSOAS.idade}
-    Log To Console  ${PESSOAS.idade}
 
-Cenario: Imprimir todas as informações da PESSOA contidas no dicionario
+Cenario: Imprimir todas as frutas
+    FOR    ${FRUTA}   IN  @{FRUTAS}
+        Log To Console  ${FRUTA}
+    END
 
-    log many     @{FRUTAS}
-
-Cenario: Sua mãe é um membro respeitavel da comunidade
+Cenario: Criar email
     [Tags]      EMAIL   
     ${EMAIL}    Criar email     bruh        moment      420
     Log To Console   ${EMAIL}
-    ${CONTADOR}     Conte até   69   420
+
+Cenario: Contar de 0 a 100
+    ${CONTADOR}     Conte até   0   100
     Log To Console      ${CONTADOR}  
 
-Cenario: Sua mãe é um membro respeitavel da comunidade
+Cenario: contar países
     [Tags]      PAÍS   
     ${CONTADOR}     Pais list
-    Log To Console      ${CONTADOR}  
 
 Cenario: quem veio lá?
     [Tags]      whomst   
-    Quem é  JO
+    Quem é  JOÃO
+    Quem é  MARIA
+    Quem é  JOJO BIZARRE ADVENTURE
 
 Cenario: onde?
     [Tags]      ond   
@@ -51,7 +78,7 @@ Cenario: onde?
 *** Keywords ***
 Criar email
     [Arguments]     ${NOM}      ${SOB}      ${IDA}   
-    ${MAIL}         Catenate    SEPARATOR=_ ${NOM}     ${SOB}     ${IDA}@robot.com
+    ${MAIL}         Catenate    SEPARATOR=_     ${NOM}     ${SOB}     ${IDA}@robot.com
     [Return]        ${MAIL}
 
 Somar os numeros "${NUM_A}" e "${NUM_B}"     
@@ -60,9 +87,15 @@ Somar os numeros "${NUM_A}" e "${NUM_B}"
 
 Conte até
     [Arguments]     ${MIN}      ${MAX}
-    @{num}=    Create List
-    FOR      ${count}    IN RANGE    ${MIN}      ${MAX}
-        Append To List      ${num}      ${count}
+    ${num}      Catenate    ${EMPTY}
+    FOR      ${count}    IN RANGE    ${MIN}      ${MAX}+1
+        IF          ${count}==${MIN}
+            ${num}      Catenate        ${count}
+        ELSE IF     ${count}==${MAX}
+            ${num}      Catenate        ${num}      e ${count}
+        ELSE
+            ${num}      Catenate        ${num}, ${count}
+        END
     END
     [Return]        ${num}
 
@@ -84,7 +117,6 @@ Quem é
     END
 
 Onde estas
-    ${numbers}=    Evaluate    random.sample(range(1, 11), 1)    random
     ${number}      Evaluate     random.randint(0, 11)
     IF     '${number}'=='5'
         Log To Console  estou no 5

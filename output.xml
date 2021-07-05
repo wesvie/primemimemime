@@ -1,111 +1,410 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 4.0.3 (Python 3.9.6 on win32)" generated="20210629 22:14:36.943" rpa="false" schemaversion="2">
-<suite id="s1" name="Web Automation" source="C:\Users\wesle\Documents\Prime Experts\tests\web_automation.robot">
-<test id="s1-t1" name="Caso de Teste 01: Pesquisar produto existente">
-<kw name="Abrir navegador" library="Resources" type="SETUP">
-<kw name="Open Browser" library="SeleniumLibrary">
-<arg>browser=${BROWSER}</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20210629 22:14:37.157" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
-<status status="PASS" starttime="20210629 22:14:37.157" endtime="20210629 22:14:38.742"/>
+<robot generator="Robot 4.0.3 (Python 3.9.6 on win32)" generated="20210704 21:08:59.801" rpa="false" schemaversion="2">
+<suite id="s1" name="Mobile Automation" source="C:\Users\wesle\Desktop\Nova pasta\primemimemime\primemimemime\tests\mobile_automation.robot">
+<test id="s1-t1" name="Cenário: Pesquisar cursos do robot">
+<kw name="Abrir o aplicativo" type="SETUP">
+<kw name="Open Application" library="AppiumLibrary">
+<arg>http://localhost:4723/wd/hub</arg>
+<arg>automationName=uiautomator2</arg>
+<arg>platformName=Android</arg>
+<arg>deviceName=pxl</arg>
+<arg>autoGrantPermissions=true</arg>
+<arg>appPackage=com.google.android.youtube</arg>
+<arg>appActivity=com.google.android.youtube.HomeActivity</arg>
+<doc>Opens a new application to given Appium server.
+Capabilities of appium server, Android and iOS,
+Please check https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/server-args.md
+| *Option*            | *Man.* | *Description*     |
+| remote_url          | Yes    | Appium server url |
+| alias               | no     | alias             |</doc>
+<status status="PASS" starttime="20210704 21:08:59.978" endtime="20210704 21:09:09.744"/>
 </kw>
-<kw name="Maximize Browser Window" library="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20210629 22:14:38.742" endtime="20210629 22:14:38.868"/>
+<status status="PASS" starttime="20210704 21:08:59.978" endtime="20210704 21:09:09.744"/>
 </kw>
-<status status="PASS" starttime="20210629 22:14:37.156" endtime="20210629 22:14:38.868"/>
+<kw name="Dado que o cliente esteja na tela home">
+<kw name="Wait Until Element Is Visible" library="AppiumLibrary">
+<arg>accessibility_id=YouTube</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" starttime="20210704 21:09:09.745" endtime="20210704 21:09:12.456"/>
 </kw>
-<kw name="Acessar a pagina home do site Automatio Practice" library="Resources">
-<kw name="Go To" library="SeleniumLibrary">
-<arg>${URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20210629 22:14:38.870" level="INFO">Opening url 'http://automationpractice.com'</msg>
-<status status="PASS" starttime="20210629 22:14:38.870" endtime="20210629 22:14:47.995"/>
+<status status="PASS" starttime="20210704 21:09:09.744" endtime="20210704 21:09:12.456"/>
 </kw>
-<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
-<arg>xpath=//*[@id='block_top_menu']/ul</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" starttime="20210629 22:14:47.995" endtime="20210629 22:14:48.018"/>
+<kw name="E pesquisa por &quot;robotframeworks&quot;" sourcename="E pesquisa por &quot;${PESQUISA}&quot;">
+<kw name="Wait Until Element Is Visible" library="AppiumLibrary">
+<arg>accessibility_id=Search</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" starttime="20210704 21:09:12.457" endtime="20210704 21:09:12.518"/>
 </kw>
-<kw name="Title Should Be" library="SeleniumLibrary">
-<arg>My Store</arg>
-<doc>Verifies that the current page title equals ``title``.</doc>
-<msg timestamp="20210629 22:14:48.022" level="INFO">Page title is 'My Store'.</msg>
-<status status="PASS" starttime="20210629 22:14:48.019" endtime="20210629 22:14:48.022"/>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>accessibility_id=Search</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20210704 21:09:12.519" level="INFO">Clicking element 'accessibility_id=Search'.</msg>
+<status status="PASS" starttime="20210704 21:09:12.518" endtime="20210704 21:09:12.578"/>
 </kw>
-<status status="PASS" starttime="20210629 22:14:38.869" endtime="20210629 22:14:48.023"/>
+<kw name="Input Text" library="AppiumLibrary">
+<arg>id=com.google.android.youtube:id/search_edit_text</arg>
+<arg>${PESQUISA}</arg>
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<msg timestamp="20210704 21:09:12.580" level="INFO">Typing text 'robotframeworks' into text field 'id=com.google.android.youtube:id/search_edit_text'</msg>
+<status status="PASS" starttime="20210704 21:09:12.579" endtime="20210704 21:09:14.597"/>
 </kw>
-<kw name="Digitar o nome do produto &quot;Blouse&quot; no campo da pesquisa" library="Resources" sourcename="Digitar o nome do produto &quot;${PRODUTO}&quot; no campo da pesquisa">
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>name=search_query</arg>
-<arg>${PRODUTO}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<msg timestamp="20210629 22:14:48.024" level="INFO">Typing text 'Blouse' into text field 'name=search_query'.</msg>
-<status status="PASS" starttime="20210629 22:14:48.023" endtime="20210629 22:14:48.096"/>
+<status status="PASS" starttime="20210704 21:09:12.457" endtime="20210704 21:09:14.597"/>
 </kw>
-<status status="PASS" starttime="20210629 22:14:48.023" endtime="20210629 22:14:48.096"/>
+<kw name="Quando clicar em Pesquisar">
+<kw name="Press Keycode" library="AppiumLibrary">
+<arg>66</arg>
+<doc>Sends a press of keycode to the device.</doc>
+<status status="PASS" starttime="20210704 21:09:14.598" endtime="20210704 21:09:15.429"/>
 </kw>
-<kw name="Clicar no botão pesquisar" library="Resources">
-<kw name="Click Element" library="SeleniumLibrary">
-<arg>name=submit_search</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20210629 22:14:48.097" level="INFO">Clicking element 'name=submit_search'.</msg>
-<status status="PASS" starttime="20210629 22:14:48.097" endtime="20210629 22:14:53.003"/>
+<status status="PASS" starttime="20210704 21:09:14.598" endtime="20210704 21:09:15.430"/>
 </kw>
-<status status="PASS" starttime="20210629 22:14:48.096" endtime="20210629 22:14:53.003"/>
+<kw name="Então serão apresentados videos sobre Robot Framework">
+<kw name="Wait Until Element Is Visible" library="AppiumLibrary">
+<arg>xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout[1]/android.widget.ImageView</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" starttime="20210704 21:09:15.430" endtime="20210704 21:09:17.579"/>
 </kw>
-<kw name="Conferir se o produto &quot;Blouse&quot; foi listado no site" library="Resources" sourcename="Conferir se o produto &quot;${PRODUTO}&quot; foi listado no site">
-<kw name="Title Should Be" library="SeleniumLibrary">
-<arg>Search - My Store</arg>
-<doc>Verifies that the current page title equals ``title``.</doc>
-<msg timestamp="20210629 22:14:53.010" level="INFO">Page title is 'Search - My Store'.</msg>
-<status status="PASS" starttime="20210629 22:14:53.005" endtime="20210629 22:14:53.010"/>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout[1]/android.widget.ImageView</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20210704 21:09:17.581" level="INFO">Clicking element 'xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.RelativeLayout[1]/android.widget.ImageView'.</msg>
+<status status="PASS" starttime="20210704 21:09:17.580" endtime="20210704 21:09:17.725"/>
 </kw>
-<kw name="Page Should Contain" library="SeleniumLibrary">
-<arg>xpath=//*[@id="center_column"]//*[@src="${URL}/img/p/7/7-home_default.jpg"]</arg>
-<doc>Verifies that current page contains ``text``.</doc>
-<kw name="Capture Page Screenshot" library="SeleniumLibrary">
-<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<msg timestamp="20210629 22:14:53.192" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
-<status status="PASS" starttime="20210629 22:14:53.039" endtime="20210629 22:14:53.192"/>
+<status status="PASS" starttime="20210704 21:09:15.430" endtime="20210704 21:09:17.725"/>
 </kw>
-<msg timestamp="20210629 22:14:53.193" level="FAIL">Page should have contained text 'xpath=//*[@id="center_column"]//*[@src="http://automationpractice.com/img/p/7/7-home_default.jpg"]' but did not.</msg>
-<status status="FAIL" starttime="20210629 22:14:53.010" endtime="20210629 22:14:53.193"/>
+<kw name="Fechar o aplicativo" type="TEARDOWN">
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20210704 21:09:18.528" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="appium-screenshot-1.png"&gt;&lt;img src="appium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20210704 21:09:17.726" endtime="20210704 21:09:18.528"/>
 </kw>
-<status status="FAIL" starttime="20210629 22:14:53.004" endtime="20210629 22:14:53.193"/>
+<kw name="Close Application" library="AppiumLibrary">
+<doc>Closes the current application and also close webdriver session.</doc>
+<status status="PASS" starttime="20210704 21:09:18.528" endtime="20210704 21:09:19.374"/>
 </kw>
-<kw name="Fechar navegador" library="Resources" type="TEARDOWN">
-<kw name="Close Browser" library="SeleniumLibrary">
-<doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20210629 22:14:53.194" endtime="20210629 22:14:58.183"/>
+<status status="PASS" starttime="20210704 21:09:17.726" endtime="20210704 21:09:19.375"/>
 </kw>
-<status status="PASS" starttime="20210629 22:14:53.194" endtime="20210629 22:14:58.183"/>
-</kw>
-<status status="FAIL" starttime="20210629 22:14:37.155" endtime="20210629 22:14:58.184">Page should have contained text 'xpath=//*[@id="center_column"]//*[@src="http://automationpractice.com/img/p/7/7-home_default.jpg"]' but did not.</status>
+<tag>PESQUISA</tag>
+<status status="PASS" starttime="20210704 21:08:59.977" endtime="20210704 21:09:19.375"/>
 </test>
-<doc>Aqui estarão presentes todos os blablabla</doc>
-<status status="FAIL" starttime="20210629 22:14:36.944" endtime="20210629 22:14:58.185"/>
+<test id="s1-t2" name="Cenário: Binyot when corrupt?">
+<kw name="Abrir o aplicativo" type="SETUP">
+<kw name="Open Application" library="AppiumLibrary">
+<arg>http://localhost:4723/wd/hub</arg>
+<arg>automationName=uiautomator2</arg>
+<arg>platformName=Android</arg>
+<arg>deviceName=pxl</arg>
+<arg>autoGrantPermissions=true</arg>
+<arg>appPackage=com.google.android.youtube</arg>
+<arg>appActivity=com.google.android.youtube.HomeActivity</arg>
+<doc>Opens a new application to given Appium server.
+Capabilities of appium server, Android and iOS,
+Please check https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/server-args.md
+| *Option*            | *Man.* | *Description*     |
+| remote_url          | Yes    | Appium server url |
+| alias               | no     | alias             |</doc>
+<status status="PASS" starttime="20210704 21:09:19.377" endtime="20210704 21:09:30.708"/>
+</kw>
+<status status="PASS" starttime="20210704 21:09:19.377" endtime="20210704 21:09:30.709"/>
+</kw>
+<kw name="Dado que o cliente esteja na tela home">
+<kw name="Wait Until Element Is Visible" library="AppiumLibrary">
+<arg>accessibility_id=YouTube</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" starttime="20210704 21:09:30.709" endtime="20210704 21:09:33.091"/>
+</kw>
+<status status="PASS" starttime="20210704 21:09:30.709" endtime="20210704 21:09:33.091"/>
+</kw>
+<kw name="E pesquisa por &quot;Vinesauce Vinny&quot;" sourcename="E pesquisa por &quot;${PESQUISA}&quot;">
+<kw name="Wait Until Element Is Visible" library="AppiumLibrary">
+<arg>accessibility_id=Search</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" starttime="20210704 21:09:33.092" endtime="20210704 21:09:33.150"/>
+</kw>
+<kw name="Click Element" library="AppiumLibrary">
+<arg>accessibility_id=Search</arg>
+<doc>Click element identified by `locator`.</doc>
+<msg timestamp="20210704 21:09:33.151" level="INFO">Clicking element 'accessibility_id=Search'.</msg>
+<status status="PASS" starttime="20210704 21:09:33.150" endtime="20210704 21:09:33.212"/>
+</kw>
+<kw name="Input Text" library="AppiumLibrary">
+<arg>id=com.google.android.youtube:id/search_edit_text</arg>
+<arg>${PESQUISA}</arg>
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<msg timestamp="20210704 21:09:33.214" level="INFO">Typing text 'Vinesauce Vinny' into text field 'id=com.google.android.youtube:id/search_edit_text'</msg>
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20210704 21:10:05.828" level="FAIL">WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+</msg>
+<status status="FAIL" starttime="20210704 21:10:05.342" endtime="20210704 21:10:05.828"/>
+</kw>
+<msg timestamp="20210704 21:10:05.829" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+</msg>
+<msg timestamp="20210704 21:10:06.122" level="FAIL">WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: Could not proxy command to the remote server. Original error: socket hang up
+</msg>
+<status status="FAIL" starttime="20210704 21:09:33.212" endtime="20210704 21:10:06.122"/>
+</kw>
+<status status="FAIL" starttime="20210704 21:09:33.092" endtime="20210704 21:10:06.122"/>
+</kw>
+<kw name="Quando clicar em Pesquisar">
+<status status="NOT RUN" starttime="20210704 21:10:06.123" endtime="20210704 21:10:06.123"/>
+</kw>
+<kw name="Buscar o canal &quot;channel_name&quot;" sourcename="Buscar o canal &quot;${CHANNEL_NAME}&quot;">
+<status status="NOT RUN" starttime="20210704 21:10:06.123" endtime="20210704 21:10:06.123"/>
+</kw>
+<kw name="Rolar para baixo até &quot;id=com.google.android.youtube:id/playlist_item&quot;" sourcename="Rolar para baixo até &quot;${ELEMENT_NAME}&quot;">
+<status status="NOT RUN" starttime="20210704 21:10:06.124" endtime="20210704 21:10:06.124"/>
+</kw>
+<kw name="Selecionar video da playlist">
+<status status="NOT RUN" starttime="20210704 21:10:06.124" endtime="20210704 21:10:06.124"/>
+</kw>
+<kw name="Fechar o aplicativo" type="TEARDOWN">
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20210704 21:10:06.131" level="FAIL">WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+</msg>
+<status status="FAIL" starttime="20210704 21:10:06.128" endtime="20210704 21:10:06.131"/>
+</kw>
+<msg timestamp="20210704 21:10:06.132" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+</msg>
+<msg timestamp="20210704 21:10:06.172" level="FAIL">WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+</msg>
+<status status="FAIL" starttime="20210704 21:10:06.125" endtime="20210704 21:10:06.172"/>
+</kw>
+<kw name="Close Application" library="AppiumLibrary">
+<doc>Closes the current application and also close webdriver session.</doc>
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20210704 21:11:10.655" level="FAIL">InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<status status="FAIL" starttime="20210704 21:11:10.267" endtime="20210704 21:11:10.655"/>
+</kw>
+<msg timestamp="20210704 21:11:10.656" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:10.670" level="FAIL">WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: Could not find a connected Android device in 20178ms.
+</msg>
+<status status="FAIL" starttime="20210704 21:10:06.172" endtime="20210704 21:11:10.670"/>
+</kw>
+<status status="FAIL" starttime="20210704 21:10:06.124" endtime="20210704 21:11:10.670">Several failures occurred:
+
+1) WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+
+
+2) WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: Could not find a connected Android device in 20178ms.
+</status>
+</kw>
+<tag>Binyot</tag>
+<status status="FAIL" starttime="20210704 21:09:19.376" endtime="20210704 21:11:10.671">WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: Could not proxy command to the remote server. Original error: socket hang up
+
+
+Also teardown failed:
+Several failures occurred:
+
+1) WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+
+
+2) WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: Could not find a connected Android device in 20178ms.
+</status>
+</test>
+<test id="s1-t3" name="Caso de Teste 02: Logar no YouTube​">
+<kw name="Abrir o aplicativo" type="SETUP">
+<kw name="Open Application" library="AppiumLibrary">
+<arg>http://localhost:4723/wd/hub</arg>
+<arg>automationName=uiautomator2</arg>
+<arg>platformName=Android</arg>
+<arg>deviceName=pxl</arg>
+<arg>autoGrantPermissions=true</arg>
+<arg>appPackage=com.google.android.youtube</arg>
+<arg>appActivity=com.google.android.youtube.HomeActivity</arg>
+<doc>Opens a new application to given Appium server.
+Capabilities of appium server, Android and iOS,
+Please check https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/server-args.md
+| *Option*            | *Man.* | *Description*     |
+| remote_url          | Yes    | Appium server url |
+| alias               | no     | alias             |</doc>
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20210704 21:11:32.839" level="FAIL">InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<status status="FAIL" starttime="20210704 21:11:32.834" endtime="20210704 21:11:32.839"/>
+</kw>
+<msg timestamp="20210704 21:11:32.840" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:32.889" level="FAIL">WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: Could not find a connected Android device in 20081ms.
+</msg>
+<status status="FAIL" starttime="20210704 21:11:10.674" endtime="20210704 21:11:32.889"/>
+</kw>
+<status status="FAIL" starttime="20210704 21:11:10.674" endtime="20210704 21:11:32.889"/>
+</kw>
+<kw name="Fechar o aplicativo" type="TEARDOWN">
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20210704 21:11:32.900" level="FAIL">InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<status status="FAIL" starttime="20210704 21:11:32.895" endtime="20210704 21:11:32.900"/>
+</kw>
+<msg timestamp="20210704 21:11:32.901" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:32.902" level="FAIL">InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<status status="FAIL" starttime="20210704 21:11:32.890" endtime="20210704 21:11:32.902"/>
+</kw>
+<kw name="Close Application" library="AppiumLibrary">
+<doc>Closes the current application and also close webdriver session.</doc>
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20210704 21:11:32.913" level="FAIL">InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<status status="FAIL" starttime="20210704 21:11:32.906" endtime="20210704 21:11:32.913"/>
+</kw>
+<msg timestamp="20210704 21:11:32.914" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:32.916" level="FAIL">InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<status status="FAIL" starttime="20210704 21:11:32.902" endtime="20210704 21:11:32.916"/>
+</kw>
+<status status="FAIL" starttime="20210704 21:11:32.890" endtime="20210704 21:11:32.916">Several failures occurred:
+
+1) InvalidSessionIdException: Message: A session is either terminated or not started
+
+
+2) InvalidSessionIdException: Message: A session is either terminated or not started
+</status>
+</kw>
+<tag>Desafio1</tag>
+<status status="FAIL" starttime="20210704 21:11:10.673" endtime="20210704 21:11:32.916">Setup failed:
+WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: Could not find a connected Android device in 20081ms.
+
+
+Also teardown failed:
+Several failures occurred:
+
+1) InvalidSessionIdException: Message: A session is either terminated or not started
+
+
+2) InvalidSessionIdException: Message: A session is either terminated or not started
+</status>
+</test>
+<test id="s1-t4" name="Caso de Teste 03: Usar método Swipe na tela​​">
+<kw name="Abrir o aplicativo" type="SETUP">
+<kw name="Open Application" library="AppiumLibrary">
+<arg>http://localhost:4723/wd/hub</arg>
+<arg>automationName=uiautomator2</arg>
+<arg>platformName=Android</arg>
+<arg>deviceName=pxl</arg>
+<arg>autoGrantPermissions=true</arg>
+<arg>appPackage=com.google.android.youtube</arg>
+<arg>appActivity=com.google.android.youtube.HomeActivity</arg>
+<doc>Opens a new application to given Appium server.
+Capabilities of appium server, Android and iOS,
+Please check https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/server-args.md
+| *Option*            | *Man.* | *Description*     |
+| remote_url          | Yes    | Appium server url |
+| alias               | no     | alias             |</doc>
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20210704 21:11:55.253" level="FAIL">InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<status status="FAIL" starttime="20210704 21:11:55.245" endtime="20210704 21:11:55.253"/>
+</kw>
+<msg timestamp="20210704 21:11:55.254" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:55.256" level="FAIL">WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: Could not find a connected Android device in 20228ms.
+</msg>
+<status status="FAIL" starttime="20210704 21:11:32.918" endtime="20210704 21:11:55.256"/>
+</kw>
+<status status="FAIL" starttime="20210704 21:11:32.918" endtime="20210704 21:11:55.256"/>
+</kw>
+<kw name="Fechar o aplicativo" type="TEARDOWN">
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20210704 21:11:55.267" level="FAIL">InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<status status="FAIL" starttime="20210704 21:11:55.263" endtime="20210704 21:11:55.268"/>
+</kw>
+<msg timestamp="20210704 21:11:55.269" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:55.270" level="FAIL">InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<status status="FAIL" starttime="20210704 21:11:55.257" endtime="20210704 21:11:55.271"/>
+</kw>
+<kw name="Close Application" library="AppiumLibrary">
+<doc>Closes the current application and also close webdriver session.</doc>
+<kw name="Capture Page Screenshot" library="AppiumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20210704 21:11:55.284" level="FAIL">InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<status status="FAIL" starttime="20210704 21:11:55.275" endtime="20210704 21:11:55.285"/>
+</kw>
+<msg timestamp="20210704 21:11:55.286" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:55.288" level="FAIL">InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<status status="FAIL" starttime="20210704 21:11:55.271" endtime="20210704 21:11:55.288"/>
+</kw>
+<status status="FAIL" starttime="20210704 21:11:55.257" endtime="20210704 21:11:55.288">Several failures occurred:
+
+1) InvalidSessionIdException: Message: A session is either terminated or not started
+
+
+2) InvalidSessionIdException: Message: A session is either terminated or not started
+</status>
+</kw>
+<tag>Desafio2</tag>
+<status status="FAIL" starttime="20210704 21:11:32.918" endtime="20210704 21:11:55.289">Setup failed:
+WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: Could not find a connected Android device in 20228ms.
+
+
+Also teardown failed:
+Several failures occurred:
+
+1) InvalidSessionIdException: Message: A session is either terminated or not started
+
+
+2) InvalidSessionIdException: Message: A session is either terminated or not started
+</status>
+</test>
+<doc>Aqui estarão presentes</doc>
+<status status="FAIL" starttime="20210704 21:08:59.803" endtime="20210704 21:11:55.291"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1" skip="0">All Tests</stat>
+<stat pass="1" fail="3" skip="0">All Tests</stat>
 </total>
 <tag>
+<stat pass="0" fail="1" skip="0">Binyot</stat>
+<stat pass="0" fail="1" skip="0">Desafio1</stat>
+<stat pass="0" fail="1" skip="0">Desafio2</stat>
+<stat pass="1" fail="0" skip="0">PESQUISA</stat>
 </tag>
 <suite>
-<stat pass="0" fail="1" skip="0" id="s1" name="Web Automation">Web Automation</stat>
+<stat pass="1" fail="3" skip="0" id="s1" name="Mobile Automation">Mobile Automation</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20210629 22:14:37.153" level="ERROR">Error in file 'C:\Users\wesle\Documents\Prime Experts\resources\Resources.robot' on line 5: Importing library 'Strings' failed: ModuleNotFoundError: No module named 'Strings'
-Traceback (most recent call last):
-  None
-PYTHONPATH:
-  C:\Users\wesle\AppData\Local\Programs\Python\Python39\Scripts\robot.exe
-  c:\users\wesle\appdata\local\programs\python\python39\python39.zip
-  c:\users\wesle\appdata\local\programs\python\python39\DLLs
-  c:\users\wesle\appdata\local\programs\python\python39\lib
-  c:\users\wesle\appdata\local\programs\python\python39
-  c:\users\wesle\appdata\local\programs\python\python39\lib\site-packages</msg>
+<msg timestamp="20210704 21:10:05.829" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+</msg>
+<msg timestamp="20210704 21:10:06.132" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+</msg>
+<msg timestamp="20210704 21:11:10.656" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:32.840" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:32.901" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:32.914" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:55.254" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:55.269" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
+<msg timestamp="20210704 21:11:55.286" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: InvalidSessionIdException: Message: A session is either terminated or not started
+</msg>
 </errors>
 </robot>

@@ -1,2 +1,0 @@
-# primemimemime
-mimemime
